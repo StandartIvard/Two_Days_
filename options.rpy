@@ -241,9 +241,9 @@ define config.mouse = {'default': [("gui/mouse/spin1.png", 0, 0),
 ################ Переделываю и настраиваю кнопки для игры
 
 init:
-    $ config.keymap['hide_windows'].append('K_SPACE')
-    $ config.keymap['hide_windows'].remove('h')
-    $ config.keymap['hide_windows'].remove('noshift_K_h')
-    $ config.keymap['hide_windows'].remove('mouseup_2')
+    config.keymap['hide_windows'].append('K_SPACE')
+    config.keymap['hide_windows'].remove('h')
+    config.keymap['hide_windows'].remove('noshift_K_h')
+    config.keymap['hide_windows'].remove('mouseup_2')
 
-    $ config.keymap['dismiss'].remove('K_SPACE')
+    config.keymap['dismiss'].remove('K_SPACE')
