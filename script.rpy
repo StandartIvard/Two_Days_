@@ -35,6 +35,11 @@ define Scene = False
 define Lusia = False
 define Haruka = False
 
+#импорт питоновских библиотек
+init python:
+    from PyQt5.QtWidgets import *
+    app = QApplication(sys.argv)
+
 label start:
 
     scene black
