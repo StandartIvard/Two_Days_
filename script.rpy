@@ -39,8 +39,8 @@ define Protest = False
 define Lunch = False
 
 #импорт питоновских библиотек
-init -1 python:
-    import subprocess
+init python:
+    from PyQTScript import PyQtMain
 
 label start:
 
@@ -1499,7 +1499,8 @@ label Forest:
 
         #Здесь должен быть тест, реакции на ответы допишу, когда он будет вставлен в код
 
-        subprocess.Popen(["python", "PyQTScript.py"])
+    label start:
+        PyQtMain()
 
 
         #4 г.

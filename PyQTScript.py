@@ -11,7 +11,7 @@ def closeEvent(event: QCloseEvent):
     event.ignore()
 
 
-class TestUILoader(QMainWindow):
+class TestUILoader(QMainWindow, app=QApplication(sys.argv)):
     testResult = 0
     senders = list()
     def __init__(self):
@@ -34,23 +34,22 @@ class TestUILoader(QMainWindow):
         else:
             self.senders.append(sender)
         if (sender == "checkBox" and "checkBox_2" in self.senders) or (sender == "checkBox_2" and "checkBox" in self.senders):
-            app.exit()
+            self.app.exit()
         elif (sender == "checkBox_3" and "checkBox_4" in self.senders) or (sender == "checkBox_4" and "checkBox_3" in self.senders):
-            app.exit()
+            self.app.exit()
         elif (sender == "checkBox_8" and "checkBox_5" in self.senders) or (sender == "checkBox_5" and "checkBox_8" in self.senders):
-            app.exit()
+            self.app.exit()
         elif (sender == "checkBox_6" and "checkBox_7" in self.senders) or (sender == "checkBox_7" and "checkBox_6" in self.senders):
-            app.exit()
+            self.app.exit()
         if len(self.senders) == 4:
             print("ready")
-            app.exit()
+            self.app.exit()
 
 
+def PyQtMain():
+    app = QApplication(sys.argv)
+    window = TestUILoader(app)
+    window.show()
+    window.closeEvent = closeEvent
 
-
-app = QApplication(sys.argv)
-window = TestUILoader()
-window.show()
-window.closeEvent = closeEvent
-
-sys.exit(app.exec_())
+    sys.exit(app.exec_())
