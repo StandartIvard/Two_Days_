@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="forUI">
+    <file>back.png</file>
+    <file>OPROSNIK_MATER.png</file>
+  </qresource>
+</RCC>
