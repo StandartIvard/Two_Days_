@@ -12,7 +12,7 @@
 ##
 ## Символы "_()", окружающие название, отмечают его как пригодное для перевода.
 
-define config.name = _("Rewrite Another Day")
+define config.name = _("Two Days")
 
 
 ## Определяет, показывать ли заголовок, данный выше, на экране главного меню.
@@ -23,7 +23,7 @@ define gui.show_name = False
 
 ## Версия игры.
 
-define config.version = "0.1a"
+define config.version = "0.1.1a"
 
 
 ## Текст, помещённый в экран "Об игре". Поместите текст между тройными скобками.
@@ -42,7 +42,7 @@ define gui.about = _p("""
 ## постройке дистрибутивов. Оно должно содержать текст формата ASCII и не должно
 ## содержать пробелы, двоеточия и точки с запятой.
 
-define build.name = "RewriteAnotherDay"
+define build.name = "TwoDays"
 
 
 ## Звуки и музыка ##############################################################
@@ -242,7 +242,7 @@ define config.mouse = {'default': [("gui/mouse/spin1.png", 0, 0),
 
 init:
     $ config.keymap['hide_windows'].append('K_SPACE')
-    $ config.keymap['hide_windows'].remove('h')
+    ##$ config.keymap['hide_windows'].remove('h')
     $ config.keymap['hide_windows'].remove('noshift_K_h')
     $ config.keymap['hide_windows'].remove('mouseup_2')
 
