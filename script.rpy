@@ -36,9 +36,8 @@ define Lusia = False
 define Haruka = False
 
 #импорт питоновских библиотек
-init python:
-    from PyQt5.QtWidgets import *
-    app = QApplication(sys.argv)
+init -1 python:
+    import subprocess
 
 label start:
 
@@ -1485,6 +1484,9 @@ label Forest:
         "В любом случае, терять такую возможность точно не стоит"
 
         #Здесь должен быть тест, реакции на ответы допишу, когда он будет вставлен в код
+
+        subprocess.Popen(["python", "PyQTScript.py"])
+
 
     label Awakening:
         stop music fadeout 4.0
