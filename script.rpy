@@ -41,6 +41,7 @@ define Lunch = False
 #импорт питоновских библиотек
 init python:
     from PyQTScript import PyQtMain
+    import threading
 
 label start:
 
@@ -1500,7 +1501,9 @@ label Forest:
         #Здесь должен быть тест, реакции на ответы допишу, когда он будет вставлен в код
 
     label start:
-        PyQtMain()
+        thread = threading.Thread(target=PyQtMain
+        thread.start()
+        thread.join()
 
 
         #4 г.
