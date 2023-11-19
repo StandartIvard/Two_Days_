@@ -1,9 +1,12 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow
+import os
+
 from PyQt5.uic import loadUi
 from PyQt5.QtGui import QCloseEvent
-from PyQt5 import QtCore
+from PyQt5.QtWidgets import QApplication, QMainWindow
 from gui import resources
+
+
 
 
 def closeEvent(event: QCloseEvent):
@@ -11,10 +14,11 @@ def closeEvent(event: QCloseEvent):
     event.ignore()
 
 
-class TestUILoader(QMainWindow, app=QApplication(sys.argv)):
+class TestUILoader(QMainWindow):
     testResult = 0
     senders = list()
-    def __init__(self):
+
+    def __init__(self, app):
         super(TestUILoader, self).__init__()
         loadUi("gui/forBuTest/TESTMAIN.ui", self)
 
@@ -26,6 +30,7 @@ class TestUILoader(QMainWindow, app=QApplication(sys.argv)):
         self.checkBox_6.stateChanged.connect(self.checkbox_changed)
         self.checkBox_7.stateChanged.connect(self.checkbox_changed)
         self.checkBox_8.stateChanged.connect(self.checkbox_changed)
+        self.app = app
 
     def checkbox_changed(self, state):
         sender = self.sender().objectName()  # Получите отправителя события
@@ -53,3 +58,5 @@ def PyQtMain():
     window.closeEvent = closeEvent
 
     sys.exit(app.exec_())
+
+PyQtMain()
