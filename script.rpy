@@ -38,10 +38,6 @@ define Haruka = False
 define Protest = False
 define Lunch = False
 
-init python:
-        import subprocess
-        import os
-
 label start:
 
     scene black
@@ -104,7 +100,7 @@ god "Ты помнишь меня?"
 
 god "Ты слишком долго воссоединялся с Жизнью..."
 
-#Жизнью - Авророй
+#Жизнью - Авророй 
 
 "Она посмотрела на полными жалости и вины глазами."
 
@@ -172,7 +168,7 @@ play music gen fadein 4.0
 
 menu:
     "Никто меня не ждёт"
-
+   
     "Мне нужна помощь":
 
         $ Submission = True
@@ -185,7 +181,7 @@ return
 
 label Dissolve_in_heat:
     k "Тревога постепенно стала меня отпускать."
-
+    
     stop music fadeout 3.0
 
     play music ph fadein 2.0
@@ -227,7 +223,7 @@ label Dissolve_in_heat:
     ". . . . ."
 
     "Есть что-то, что не даёт мне покоя."
-
+    
     "Что-то, раздирающее меня изнутри."
 
     show жизнь
@@ -253,7 +249,7 @@ label Dissolve_in_heat:
     "Я вскочил с кровати."
 
     "Моя комната."
-
+    
     "Обычный день."
 
     "Текущие дата и время на моём мобильнике..."
@@ -400,7 +396,7 @@ label Morning_of_the_first_day:
 
         "Маппи нет, но я всё равно пошёл в лес":
             jump Forest
-
+        
         "Маппи нет, но я всё равно пошёл в школу":
             jump Bustle
 
@@ -408,7 +404,7 @@ label Morning_of_the_first_day:
 
             $ Angry_cat = True
 
-            jump Cat
+            jump Cat 
 
 label Cat:
     show bg020
@@ -508,15 +504,15 @@ label Bustle:
     "Надо будет предотвратиить её падение с дерева"
 
 label School:
-
+    
     show bg002
-
+    
     "Сейчас идёт урок истории города"
 
     "Никогда его не любил…"
 
-    "Наш историк – странный мужчина пятидесяти лет, помешанный на защите окружающей среды."
-
+    "Наш историк – странный мужчина пятидесяти лет, помешанный на защите окружающей среды." 
+    
     "Он часто нам напоминает, какие мы счастливчики, что родились в городе-мечте, а не в каком-нибудь грязном мегаполисе"
 
     "Всегда одевается очень опрятно, и ведёт себя прилично"
@@ -757,7 +753,7 @@ label Forest:
         "Я резко выхватил их у неё из рук"
 
         hide cgm_ch10u_0000
-
+        
         show cgm_ch17_0000
 
         k "Ммххх!"
@@ -806,9 +802,9 @@ label Forest:
 
         t "Эээ..."
 
-        t "Я забыла её название"
+        t "Я забыла её название" 
 
-        t "Я слушала про неё"
+        t "Я слушала про неё" 
 
         t "И запомнила, что она была школой для девочек"
 
@@ -863,7 +859,7 @@ label Forest:
         scene bg002
 
         with Fade(1.0, 1.0, 2.0)
-
+        
         "Я зашёл в кабинет, громко постучав"
 
         "Учительница английского" "Почему ты опоздал?"
@@ -900,7 +896,7 @@ label Forest:
         "Можно было бы попытаться снова спасти этот мир"
 
         "Но я не успею этого сделать"
-
+        
         "А если бы и успел"
 
         "Будет ли что-то после этих двух дней?.."
@@ -1040,7 +1036,7 @@ label Forest:
         "Страшеклассник" "Понятия не имею"
 
         show cgm_iu13
-
+        
         i "И про что ты рассправшиваешь старшеклассников?"
 
         "Джек пот!"
@@ -1066,7 +1062,7 @@ label Forest:
         hide cgm_iu10
 
         show cgm_iu17
-
+        
         i "Она точно живёт в школе, появляется здесь по ночам, ходят слухи, что она курирует всех учителей, директора, занимается шантажом..."
 
         "Она запнулась на полуслове"
@@ -1140,7 +1136,7 @@ label Forest:
         "Акане, как всегда, устраивает шпионские игры ради забавы"
 
         "В любом случае"
-
+        
         "Как убедить всех собраться в клуб..."
 
         "Ещё и за день"
@@ -1371,7 +1367,7 @@ label Forest:
         "Наверное, мне стоило что-то сказать?.."
 
         hide cgm_ak17u_0000
-
+        
         show cgm_ak34_0000
 
         a "..."
@@ -1403,7 +1399,7 @@ label Forest:
         "Ели выдавил я из себя"
 
         hide cgm_ak17_0000
-
+        
         show cgm_ak15_0000
 
         "Она кинула мне листок"
@@ -1426,7 +1422,7 @@ label Forest:
         k "С нашим городом явно что-то не ладно"
 
         k "Частое появление в нашей местности криптидов и неопознанных существ нельзя списать на случайность"
-
+        
         "Я пытаюсь говорить с важным видом, чтобы выглядеть убедительнее"
 
         k "У меня уже есть команда из нескольких человек"
@@ -1499,12 +1495,74 @@ label Forest:
 
         #Здесь должен быть тест, реакции на ответы допишу, когда он будет вставлен в код
 
-    python:
-        path = os.path.abspath("Two days/dist/PyQTScript/PyQTScript.exe")
-        print(config.basedir + "\game\PyQTScript.exe")
+    init python:
+        import os
 
-        s = subprocess.Popen([config.basedir + "\game\PyQTScript.exe"])
-        print(s)
+        import sys
+        import PyQt5
+        from PyQt5.QtWidgets import QApplication, QMainWindow
+        from PyQt5.uic import loadUi
+        from PyQt5.QtGui import QCloseEvent
+        from gui import resources
+
+
+        def closeEvent(event: QCloseEvent):
+            # Предотвращаем закрытие окна
+            event.ignore()
+
+
+        class TestUILoader(QMainWindow):
+            testResult = 0
+            senders = list()
+
+            def __init__(self, app):
+                super(TestUILoader, self).__init__()
+                loadUi("gui/forBuTest/TESTMAIN.ui", self)
+
+                self.checkBox.stateChanged.connect(self.checkbox_changed)
+                self.checkBox_2.stateChanged.connect(self.checkbox_changed)
+                self.checkBox_3.stateChanged.connect(self.checkbox_changed)
+                self.checkBox_4.stateChanged.connect(self.checkbox_changed)
+                self.checkBox_5.stateChanged.connect(self.checkbox_changed)
+                self.checkBox_6.stateChanged.connect(self.checkbox_changed)
+                self.checkBox_7.stateChanged.connect(self.checkbox_changed)
+                self.checkBox_8.stateChanged.connect(self.checkbox_changed)
+                self.app = app
+
+            def checkbox_changed(self, state):
+                sender = self.sender().objectName()  # Получите отправителя события
+                if sender in self.senders:
+                    self.senders.remove(sender)
+                else:
+                    self.senders.append(sender)
+                if (sender == "checkBox" and "checkBox_2" in self.senders) or (sender == "checkBox_2" and "checkBox" in self.senders):
+                    self.app.exit()
+                elif (sender == "checkBox_3" and "checkBox_4" in self.senders) or (sender == "checkBox_4" and "checkBox_3" in self.senders):
+                    self.app.exit()
+                elif (sender == "checkBox_8" and "checkBox_5" in self.senders) or (sender == "checkBox_5" and "checkBox_8" in self.senders):
+                    self.app.exit()
+                elif (sender == "checkBox_6" and "checkBox_7" in self.senders) or (sender == "checkBox_7" and "checkBox_6" in self.senders):
+                    self.app.exit()
+                if len(self.senders) == 4:
+                    print("ready")
+                    self.app.exit()
+
+
+        app = QApplication(sys.argv)
+        window = TestUILoader(app)
+        window.show()
+        window.closeEvent = closeEvent
+
+        sys.exit(app.exec_())
+
+        """import sys
+        from PyQTScript import PyQtMain
+        import threading
+
+        thread = threading.Thread(target=PyQtMain)
+        thread.start()
+        thread.join()"""
+
 
         #4 г.
 
