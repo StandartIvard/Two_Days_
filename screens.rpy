@@ -234,7 +234,6 @@ style choice_button is default:
 style choice_button_text is default:
     properties gui.button_text_properties("choice_button")
 
-
 ## Экран быстрого меню #########################################################
 ##
 ## Быстрое меню показывается внутри игры, чтобы обеспечить лёгкий доступ к
@@ -248,6 +247,73 @@ transform show_hide_navigation:
     on hide:
         xalign 0.0
         linear 1.0 xalign 0.5
+
+init:
+
+    screen preferences:
+
+        tag menu
+
+        imagemap:
+            ground "gui/game_menu_preferences.png"
+            idle "gui/game_menu_preferences_idle.png"
+            hover "gui/game_menu_preferences_hover.png"
+
+            hotspot (236, 132, 120, 27) action Preference("display", "fullscreen")
+            hotspot (356, 132, 108, 27) action Preference("display", "window")
+
+            hotspot (271, 192, 108, 27) action Preference("rollback side", "disable")
+            hotspot (380, 192, 108, 27) action Preference("rollback side", "left")
+            hotspot (489, 192, 108, 27) action Preference("rollback side", "right")
+
+            hotspot (51, 314, 112, 29) action Preference("skip", "toggle")
+            hotspot (51, 376, 112, 29) action Preference("after choices", "toggle")
+            hotspot (51, 433, 112, 29) action InvertSelected(Preference("transitions", "toggle"))
+
+            hotspot (190, 670, 178, 44) action Quit(confirm=True)
+            hotspot (371, 670, 178, 44) action ShowMenu ("main_menu") 
+            hotspot (551, 670, 178, 44) action ShowMenu ("save_file_slots")
+            hotspot (731, 670, 178, 44) action ShowMenu ("load_file_slots")
+            hotspot (913, 670, 178, 44) action Return()
+
+            hotspot (190, 670, 178, 44) action Quit(confirm=True)
+            hotspot (371, 670, 178, 44) action [Play ("sound", "audio/sounds/button_on.mp3"), MainMenu()] hovered [Play("sound", "audio/sounds/hover.mp3")]
+            hotspot (551, 670, 178, 44) action [Play("sound", "audio/sounds/button_on.mp3"), ShowMenu("save_file_slots")] hovered [Play("sound", "audio/sounds/hover.mp3")] 
+            hotspot (731, 670, 178, 44) action [Play("sound", "audio/sounds/button_on.mp3"), ShowMenu("load_file_slots")] hovered [Play("sound", "audio/sounds/hover.mp3")] 
+            hotspot (913, 670, 178, 44) action Return()
+
+            textbutton _(""):
+                style "return_button"
+                action Return()
+
+            bar:
+                xysize(225, 35)
+                xalign 0.07
+                yalign 0.827
+#                xmaximum 200
+                value Preference("text speed")
+
+#           text "Скорость екста":
+            bar:
+                xysize(225, 35)
+                xalign 0.37
+                yalign 0.825
+ #               xmaximum 200
+                value Preference("auto-forward time")
+
+            bar:
+                xysize(225, 35)
+                xalign 0.64
+                yalign 0.8235
+ #               xmaximum 200
+                value Preference("music volume")
+
+            bar:
+                xysize(225, 35)
+                xalign 0.95
+                yalign 0.8235
+ #               xmaximum 200
+                value Preference("sound volume")
 
 screen quick_menu():
 
@@ -308,40 +374,40 @@ screen navigation():
 
         spacing gui.navigation_spacing
 
-        if main_menu:
+        #if main_menu:
 
-            textbutton _("Начать") action Start()
+            #textbutton _("Начать") action Start()
 
-        else:
+        #else:
 
-            textbutton _("История") action ShowMenu("history")
+            #textbutton _("История") action ShowMenu("history")
 
-            textbutton _("Сохранить") action ShowMenu("save")
+            #textbutton _("Сохранить") action ShowMenu("save")
 
-        textbutton _("Загрузить") action ShowMenu("load")
+        #textbutton _("Загрузить") action ShowMenu("load")
 
-        textbutton _("Настройки") action ShowMenu("preferences")
+        #textbutton _("Настройки") action ShowMenu("preferences")
 
-        if _in_replay:
+        #if _in_replay:
 
-            textbutton _("Завершить повтор") action EndReplay(confirm=True)
+            #textbutton _("Завершить повтор") action EndReplay(confirm=True)
 
-        elif not main_menu:
+        #elif not main_menu:
 
-            textbutton _("Главное меню") action MainMenu()
+            #textbutton _("Главное меню") action MainMenu()
 
-        textbutton _("Об игре") action ShowMenu("about")
+        #textbutton _("Об игре") action ShowMenu("about")
 
-        if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
+        #if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
 
             ## Помощь не необходима и не относится к мобильным устройствам.
-            textbutton _("Помощь") action ShowMenu("help")
+            #textbutton _("Помощь") action ShowMenu("help")
 
-        if renpy.variant("pc"):
+        #if renpy.variant("pc"):
 
             ## Кнопка выхода блокирована в iOS и не нужна на Android и в веб-
             ## версии.
-            textbutton _("Выход") action Quit(confirm=not main_menu)
+            #textbutton _("Выход") action Quit(confirm=not main_menu)
 
 
 style navigation_button is gui_button
@@ -367,55 +433,16 @@ screen main_menu():
     ## заменять этот.
     tag menu
 
-    add gui.main_menu_background
-
-    ## Эта пустая рамка затеняет главное меню.
-    frame:
-        style "main_menu_frame"
-
-    ## Оператор use включает отображение другого экрана в данном. Актуальное
-    ## содержание главного меню находится на экране навигации.
-    use navigation
-
-    if gui.show_name:
-
-        vbox:
-            style "main_menu_vbox"
-
-            text "[config.name!t]":
-                style "main_menu_title"
-
-            text "[config.version]":
-                style "main_menu_version"
-
-style main_menu_frame is empty
-style main_menu_vbox is vbox
-style main_menu_text is gui_text
-style main_menu_title is main_menu_text
-style main_menu_version is main_menu_text
-
-style main_menu_frame:
-    xsize 280
-    yfill True
-
-    background "gui/overlay/main_menu.png"
-
-style main_menu_vbox:
-    xalign 1.0
-    xoffset -20
-    xmaximum 800
-    yalign 1.0
-    yoffset -20
-
-style main_menu_text:
-    properties gui.text_properties("main_menu", accent=True)
-
-style main_menu_title:
-    properties gui.text_properties("title")
-
-style main_menu_version:
-    properties gui.text_properties("version")
-
+    imagemap:
+         ground "gui/main_menu.png"
+         idle "gui/main_menu_normal.png"
+         hover "gui/main_menu_hover.png"
+              
+         hotspot (29, 669, 212, 52) action Start ()
+         hotspot (282, 669, 212, 52) action ShowMenu("load") 
+         hotspot (533, 669, 212, 52) action ShowMenu("preferences")
+         hotspot (777, 669, 212, 52) action ShowMenu("about") 
+         hotspot (1025, 669, 212, 52) action Quit(confirm=True)
 
 ## Экран игрового меню #########################################################
 ##
@@ -558,20 +585,14 @@ screen about():
 
     ## Этот оператор включает игровое меню внутрь этого экрана. Дочерний vbox
     ## включён в порт просмотра внутри экрана игрового меню.
-    use game_menu(_("Об игре"), scroll="viewport"):
+    use game_menu(_(""), scroll="viewport"):
 
         style_prefix "about"
 
         vbox:
 
-            label "[config.name!t]"
-            text _("Версия [config.version!t]\n")
-
             ## gui.about обычно установлено в options.rpy.
-            if gui.about:
-                text "[gui.about!t]\n"
 
-            text _("Сделано с помощью {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
             key "K_ESCAPE" action Return()
 
 
@@ -676,7 +697,7 @@ screen load_file_slots():
             add "gui/load_screen/low_navigation.png" xpos 193 ypos 607
 
         ### Номер страницы, который может быть изменён посредством клика на кнопку.
-        text FilePageName(auto='a', quick='q') xpos 445 ypos 607 font "font/constan.ttf" size 24 color "#ffffff"
+        text FilePageName(auto='a', quick='q') xpos 445 ypos 607 font "font/Nutori.ttf" size 24 color "#ffffff"
 
         ##### Таблица слотов.
         vbox:
@@ -721,12 +742,12 @@ screen load_file_slots():
                         add FileScreenshot(slot, empty="gui/load_screen/no_data.png") xsize 128 ysize 72
                         
                         ##### Время
-                        text FileTime(slot, format=_("{#file_time}%Y/%m/%d (%H:%M)"), empty=_(" ")) xpos 185 ypos -73:
+                        text FileTime(slot, format=_("{#file_time}%Y/%m/%d (%H:%M)"), empty=_(" ")) xpos 205 ypos -73:
                             style "saveload_slot_time_text_position"
 
                         ##### Номер слота
                         text FileSlotName(slot, slots_per_page=10, format="%s%d", quick='', auto='') xpos -35 ypos -91: 
-                            font "font/constan.ttf"
+                            font "font/Nutori.ttf"
 
         vbox:
             xpos 154 ypos 119
@@ -772,6 +793,18 @@ screen load_file_slots():
             hotspot (1140, 0, 40, 40) action [FilePage(20)] hovered [Play("sound", "audio/sounds/hover.mp3")]
             hotspot (1185, 0, 40, 40) action [FilePage("auto")] hovered [Play("sound", "audio/sounds/hover.mp3")]
             hotspot (1230, 0, 40, 40) action [FilePage("quick")] hovered [Play("sound", "audio/sounds/hover.mp3")]
+
+
+        imagemap:
+            idle "gui/game_menu_load_idle.png"
+            hover "gui/game_menu_load_hover.png"
+
+            hotspot (190, 670, 178, 44) action Quit(confirm=True)
+            hotspot (371, 670, 178, 44) action [Play("sound", "audio/sounds/button_on.mp3"), MainMenu()] hovered [Play("sound", "audio/sounds/hover.mp3")]
+            hotspot (551, 670, 178, 44) action [Play("sound", "audio/sounds/button_on.mp3"), ShowMenu("save_file_slots")] hovered [Play("sound", "audio/sounds/hover.mp3")] 
+            hotspot (731, 670, 178, 44) action [Play("sound", "audio/sounds/button_on.mp3"), ShowMenu("preferences")] hovered [Play("sound", "audio/sounds/hover.mp3")] 
+            hotspot (913, 670, 178, 44) action Return()
+
         # Кнопки быстрого доступа
         key "1" action [FilePage(1)]
         key "2" action [FilePage(2)]
@@ -809,7 +842,7 @@ screen save_file_slots():
             add "gui/save_screen/low_navigation.png" xpos 193 ypos 607
 
         ### Номер страницы, который может быть изменён посредством клика на кнопку.
-        text FilePageName(auto='a', quick='q') xpos 445 ypos 607 font "font/constan.ttf" size 24 color "#ffffff"
+        text FilePageName(auto='a', quick='q') xpos 445 ypos 607 font "font/Nutori.ttf" size 24 color "#ffffff"
 
         ##### Таблица слотов.
         vbox:
@@ -855,12 +888,12 @@ screen save_file_slots():
                         add FileScreenshot(slot, empty="gui/save_screen/no_data.png") xsize 128 ysize 72
                         
                         ##### Время
-                        text FileTime(slot, format=_("{#file_time}%Y/%m/%d (%H:%M)"), empty=_(" ")) xpos 185 ypos -73:
+                        text FileTime(slot, format=_("{#file_time}%Y/%m/%d (%H:%M)"), empty=_(" ")) xpos 205 ypos -73:
                             style "saveload_slot_time_text_position"
 
                         ##### Номер слота
                         text FileSlotName(slot, slots_per_page=10, format="%s%d", quick='', auto='') xpos -35 ypos -91: 
-                            font "font/constan.ttf"
+                            font "font/Nutori.ttf"
         
         ### Дополнительная информация
         vbox:
@@ -907,6 +940,17 @@ screen save_file_slots():
             hotspot (1140, 0, 40, 40) action [FilePage(20)] hovered [Play("sound", "audio/sounds/hover.mp3")]
             hotspot (1185, 0, 40, 40) action [FilePage("auto")] hovered [Play("sound", "audio/sounds/hover.mp3")]
             hotspot (1230, 0, 40, 40) action [FilePage("quick")] hovered [Play("sound", "audio/sounds/hover.mp3")]
+
+        imagemap:
+            idle "gui/game_menu_save_idle.png"
+            hover "gui/game_menu_save_hover.png"
+
+            hotspot (190, 670, 178, 44) action Quit(confirm=True)
+            hotspot (371, 670, 178, 44) action [Play ("sound", "audio/sounds/button_on.mp3"), MainMenu()] hovered [Play("sound", "audio/sounds/hover.mp3")]
+            hotspot (551, 670, 178, 44) action [Play("sound", "audio/sounds/button_on.mp3"), ShowMenu("preferences")] hovered [Play("sound", "audio/sounds/hover.mp3")] 
+            hotspot (731, 670, 178, 44) action [Play("sound", "audio/sounds/button_on.mp3"), ShowMenu("load_file_slots")] hovered [Play("sound", "audio/sounds/hover.mp3")] 
+            hotspot (913, 670, 178, 44) action Return()
+
         # Кнопки быстрого доступа
         key "1" action [FilePage(1)]
         key "2" action [FilePage(2)]
@@ -924,6 +968,21 @@ screen save_file_slots():
         # Удалить сохранение
         key "K_DELETE" action FileDelete(slot, confirm=True)
 
+init:
+
+    screen about:
+
+        tag menu
+
+        imagemap:
+            ground "gui/game_menu_about.png"
+            idle "gui/game_menu_about_idle.png"
+            hover "gui/game_menu_about_hover.png"
+
+            hotspot (280, 670, 178, 44) action Quit(confirm=True)
+            hotspot (459, 670, 178, 44) action [Play("sound", "audio/sounds/button_on.mp3"), ShowMenu("save_file_slots")] hovered [Play("sound", "audio/sounds/hover.mp3")] 
+            hotspot (639, 670, 178, 44) action [Play("sound", "audio/sounds/button_on.mp3"), ShowMenu("load_file_slots")] hovered [Play("sound", "audio/sounds/hover.mp3")] 
+            hotspot (814, 670, 182, 44) action Return()
 
 
 ## Экран настроек ##############################################################
@@ -964,6 +1023,7 @@ screen preferences():
                     textbutton _("Всего текста") action Preference("skip", "toggle")
                     textbutton _("После выборов") action Preference("after choices", "toggle")
                     textbutton _("Переходов") action InvertSelected(Preference("transitions", "toggle"))
+
 
                 ## Дополнительные vbox'ы типа "radio_pref" или "check_pref"
                 ## могут быть добавлены сюда для добавления новых настроек.
@@ -1018,7 +1078,6 @@ screen preferences():
                         textbutton _("Без звука"):
                             action Preference("all mute", "toggle")
                             style "mute_all_button"
-            key "K_ESCAPE" action Return()
 
 
 style pref_label is gui_label

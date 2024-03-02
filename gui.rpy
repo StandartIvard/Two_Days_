@@ -23,7 +23,7 @@ init python:
 ## Цвета текста в интерфейсе.
 
 ## Акцентный цвет используется в заголовках и подчёркнутых текстах.
-define gui.accent_color = u'#0099ff'
+define gui.accent_color = u'#ffffff'
 
 ## Цвет, используемый в текстовой кнопке, когда она не выбрана и не наведена.
 define gui.idle_color = u'#000000'
@@ -50,19 +50,19 @@ define gui.hover_muted_color = u'#99d6ff'
 
 ## Цвета, используемые в тексте диалогов и выборов.
 define gui.text_color = u'#ffffff'
-define gui.interface_text_color = u'#ffffff'
+define gui.interface_text_color = u'#000000'
 
 
 ## Шрифты и их размеры #########################################################
 
 ## Шрифт, используемый внутриигровым текстом.
-define gui.text_font = "font/constan.ttf"
+define gui.text_font = "font/Nutori.ttf"
 
 ## Шрифт, используемый именами персонажей.
-define gui.name_text_font = "font/constan.ttf"
+define gui.name_text_font = "font/Nutori.ttf"
 
 ## Шрифт, используемый текстом вне игры.
-define gui.interface_text_font = "font/constan.ttf"
+define gui.interface_text_font = "font/Nutori.ttf"
 
 ## Размер нормального текста диалога.
 define gui.text_size = 22
